@@ -5,7 +5,6 @@ import com.almor.user.dto.request.CreateUserDto;
 import com.almor.user.dto.response.UserResponseDto;
 import com.almor.user.dto.request.UpdateUserDto;
 import com.almor.user.entity.User;
-import com.almor.user.message.CreateUserMessage;
 import com.almor.user.service.UserService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
