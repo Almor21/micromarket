@@ -13,6 +13,7 @@
         <module>common</module>
         <module>keycloak-listeners/kafka-user-listener</module>
         <module>services/user</module>
+        <module>services/config-server</module>
     </modules>
 
 </project>
