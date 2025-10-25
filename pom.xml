@@ -8,4 +8,11 @@
     <name>micromarket</name>
     <description>Market project of microservices</description>
     <packaging>pom</packaging>
+
+    <modules>
+        <module>common</module>
+        <module>keycloak-listeners/kafka-user-listener</module>
+        <module>services/user</module>
+    </modules>
+
 </project>
