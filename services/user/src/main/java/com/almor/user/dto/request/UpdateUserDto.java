@@ -27,4 +27,6 @@ public class UpdateUserDto {
     @Size(max = 100, message = "Last name must not exceed 100 characters")
     private String lastName;
 
+    private boolean enabled;
+
 }

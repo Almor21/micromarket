@@ -1,13 +1,13 @@
 package com.almor.user.dto.request;
 
 import com.almor.user.annotation.ValidUUID;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -33,5 +33,9 @@ public class CreateUserDto {
     @NotBlank(message = "Last name is required")
     @Size(max = 100, message = "Last name must not exceed 100 characters")
     private String lastName;
+
+    @NotNull(message = "Creation date cannot be null")
+    @PastOrPresent(message = "Creation date cannot be in the future")
+    private LocalDateTime createdAt;
 
 }
