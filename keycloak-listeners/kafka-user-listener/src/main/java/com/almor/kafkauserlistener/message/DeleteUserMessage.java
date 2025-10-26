@@ -9,18 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class CreateUserMessage {
-
-    private String id;
-
-    private String username;
-
-    private String email;
-
-    private String firstName;
-
-    private String lastName;
-
-    private long createdAt;
-
+public class DeleteUserMessage {
+    String id;
 }

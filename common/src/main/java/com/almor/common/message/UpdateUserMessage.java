@@ -9,11 +9,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class CreateUserMessage {
+public class UpdateUserMessage {
 
     private String id;
-
-    private String username;
 
     private String email;
 
@@ -21,6 +19,6 @@ public class CreateUserMessage {
 
     private String lastName;
 
-    private long createdAt;
+    private Boolean enable;
 
 }
