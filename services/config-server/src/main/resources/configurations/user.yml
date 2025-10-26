@@ -28,4 +28,7 @@ spring:
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       properties:
         spring.json.trusted.packages: '*'
-        spring.json.type.mapping: createUserMessage:com.almor.common.message.CreateUserMessage
+        spring.json.type.mapping: >
+          createUserMessage:com.almor.common.message.CreateUserMessage,
+          updateUserMessage:com.almor.common.message.UpdateUserMessage,
+          deleteUserMessage:com.almor.common.message.DeleteUserMessage
