@@ -1,0 +1,27 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    gateway:
+      server:
+        webflux:
+          discovery:
+            locator:
+              enabled: true
+          routes:
+            - id: user-service
+              uri: lb:http://USER
+              predicates:
+                - Path=/api/users/**
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9090/realms/${KEYCLOAK_REALM}
+
+jwt:
+  auth:
+    converter:
+      resource-id: ${KEYCLOAK_CLIENT_ID}
+      principle-attribute: preferred_username
