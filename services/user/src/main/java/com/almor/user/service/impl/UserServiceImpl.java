@@ -36,21 +36,23 @@ public class UserServiceImpl implements UserService {
                 .email(data.getEmail())
                 .firstName(data.getFirstName())
                 .lastName(data.getLastName())
+                .createdAt(data.getCreatedAt())
                 .build();
 
         return userRepository.save(user);
     }
 
     @Override
-    public User update(String id, UpdateUserDto user) {
-        return userRepository.findById(id)
-                .map(existing -> {
-                    existing.setEmail(user.getEmail());
-                    existing.setFirstName(user.getFirstName());
-                    existing.setLastName(user.getLastName());
-                    return userRepository.save(existing);
-                })
+    public User update(String id, UpdateUserDto data) {
+        User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
+
+        user.setEmail(data.getEmail());
+        user.setFirstName(data.getFirstName());
+        user.setLastName(data.getLastName());
+        user.setEnabled(data.isEnabled());
+
+        return userRepository.save(user);
     }
 
     @Override
