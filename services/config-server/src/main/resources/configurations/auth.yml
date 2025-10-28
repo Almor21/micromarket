@@ -2,7 +2,8 @@ server:
   port: 8082
 
 keycloak:
-  url: http://localhost:9090/realms/${KEYCLOAK_REALM}
-  token-route: /protocol/openid-connect/token
-  registration-route: /clients-registrations/openid-connect
+  url: http://localhost:9090
+  token-route: /realms/${KEYCLOAK_REALM}/protocol/openid-connect/token
+  registration-route: /admin/realms/${KEYCLOAK_REALM}/users
   client-id: ${KEYCLOAK_CLIENT_ID}
+  client-secret: ${KEYCLOAK_CLIENT_SECRET}
