@@ -1,5 +1,6 @@
 package com.almor.auth.client;
 
+import com.almor.auth.client.dto.AdminRegisterUserDto;
 import com.almor.auth.dto.response.KeycloakTokenResponseDto;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
@@ -67,6 +68,17 @@ public class KeycloakClient {
                 .body(KeycloakTokenResponseDto.class);
 
         return response.getAccess_token();
+    }
+
+    public void register(AdminRegisterUserDto data) {
+        String adminToken = getClientToken();
+
+        restClient.post()
+                .uri(registerRoute)
+                .header(HttpHeaders.AUTHORIZATION, "Bearer " + adminToken)
+                .body(data)
+                .retrieve()
+                .toBodilessEntity();
     }
 
 }
