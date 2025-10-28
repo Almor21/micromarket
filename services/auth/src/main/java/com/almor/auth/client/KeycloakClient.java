@@ -1,7 +1,9 @@
 package com.almor.auth.client;
 
 import com.almor.auth.dto.response.KeycloakTokenResponseDto;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
@@ -23,18 +25,37 @@ public class KeycloakClient {
     @Value("${keycloak.client-id}")
     private String clientId;
 
-    private final RestClient.Builder restClientBuilder;
+    @Value("${keycloak.client-secret}")
+    private String clientSecret;
 
-    public KeycloakClient() {
-        this.restClientBuilder = RestClient.builder();
+    private RestClient restClient;
+
+    @PostConstruct
+    public void init() {
+        this.restClient = RestClient.create(baseUrl);
     }
 
-    public String getToken(String username, String password) {
-        RestClient restClient = restClientBuilder.baseUrl(baseUrl).build();
+    private String getClientToken() {
+        MultiValueMap<String, String> data = new LinkedMultiValueMap<>();
+        data.add("grant_type", "client_credentials");
+        data.add("client_id", clientId);
+        data.add("client_secret", clientSecret);
 
+        KeycloakTokenResponseDto response = restClient.post()
+                .uri(tokenRoute)
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .body(data)
+                .retrieve()
+                .body(KeycloakTokenResponseDto.class);
+
+        return response.getAccess_token();
+    }
+
+    public String getUserToken(String username, String password) {
         MultiValueMap<String, String> data = new LinkedMultiValueMap<>();
         data.add("grant_type", "password");
         data.add("client_id", clientId);
+        data.add("client_secret", clientSecret);
         data.add("username", username);
         data.add("password", password);
 
