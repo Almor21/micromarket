@@ -14,6 +14,10 @@ spring:
               uri: lb:http://USER
               predicates:
                 - Path=/api/users/**
+            - id: auth-service
+              uri: lb:http://AUTH
+              predicates:
+                - Path=/api/auth/**
   security:
     oauth2:
       resourceserver:
