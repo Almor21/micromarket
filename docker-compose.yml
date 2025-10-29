@@ -23,6 +23,8 @@ services:
     volumes:
       - keycloak_data:/opt/keycloak/data
       - ./keycloak-listeners/providers:/opt/keycloak/providers
+    depends_on:
+      - kafka-broker
     command:
       - 'start-dev'
 
